@@ -1,0 +1,19 @@
+<div class="modal">
+    <h2>Editar Veículo</h2>
+  
+    <label>Placa:</label>
+    <input [(ngModel)]="veiculo!.placa" />
+  
+    <label>Motorista:</label>
+    <input [(ngModel)]="veiculo!.motorista" />
+  
+    <label>Entrada:</label>
+    <select [(ngModel)]="veiculo!.entrada">
+      <option>Aprovada</option>
+      <option>Reprovada</option>
+    </select>
+  
+    <button (click)="salvarEdicao()">Salvar</button>
+    <button (click)="cancelarEdicao()">Cancelar</button>
+  </div>
+  
