@@ -23,7 +23,7 @@ function api(db:Connection) {
   const userRepository = new UserRepository(db)
   const placaRepository = new PlacaRepository(db)
   
-  app.use("/usuarios", usuarioRouter(userRepository))
+  app.use("/usuario", usuarioRouter(userRepository))
   app.use("/placa", placaRouter(placaRepository))
 
   app.listen(port, () => {
