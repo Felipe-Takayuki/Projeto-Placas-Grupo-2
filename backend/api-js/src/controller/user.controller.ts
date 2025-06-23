@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { IGenericControler } from './generic.controller';
 import { UserRepository } from '../repository/usuario.repository';
+import { IUser } from '../model/usuario.model';
 
 export class UsuarioController implements IGenericControler{
 
