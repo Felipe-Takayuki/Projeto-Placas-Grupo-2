@@ -1,12 +1,13 @@
 
 import { Router } from 'express';
-import { UsuarioController } from '../src/controller/user.controller';
 import { PlacaRepository } from '../src/repository/placa.repository';
 import { PlacaController } from '../src/controller/placa.controller';
 export function placaRouter(placaRepository: PlacaRepository) {
-  const userControler = new PlacaController(placaRepository)
+  const placaController = new PlacaController(placaRepository)
   const router = Router();
-  router.post('/',(req,res) => userControler.create(req, res));
-  router.get('/',(req, res) =>  userControler.getAll(req, res));
+  router.post('/',(req,res) => placaController.create(req, res));
+  router.delete('/:id',(req, res)=> placaController.delete(req, res));
+  router.put('/', (req, res)=> placaController.update(req, res))
+  router.get('/',(req, res) =>  placaController.getAll(req, res));
   return router
 }
