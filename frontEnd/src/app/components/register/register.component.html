@@ -1,1 +1,67 @@
-<p>register works!</p>
+<div class="container">
+
+  <!-- LADO ESQUERDO -->
+  <div class="left">
+    <img src="assets/logo-final.png" alt="Logo Placas" class="logo" />
+    <h2>Bem-vindo de volta!</h2>
+    <p>Acesse sua conta para registrar placas, consultar entradas e controlar acessos com facilidade.</p>
+    <button class="btn-outline" routerLink="/login">Login</button>
+  </div>
+
+  <!-- LADO DIREITO - FORMULÁRIO -->
+  <div class="right">
+    <form (ngSubmit)="onSubmit()" #cadastroForm="ngForm">
+      <h2>Criar Conta</h2>
+
+      <label for="nome">Nome</label>
+      <div class="input-icon">
+        <input
+          id="nome"
+          type="text"
+          name="nome"
+          [(ngModel)]="nome"
+          placeholder="Digite seu nome completo"
+          required />
+      </div>
+
+      <label for="email">Email</label>
+      <div class="input-icon">
+        <input
+          id="email"
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="exemplo@email.com"
+          required />
+        <span class="material-icons">mail</span>
+      </div>
+
+      <label for="senha">Senha</label>
+      <div class="input-icon">
+        <input
+          id="senha"
+          type="password"
+          name="senha"
+          [(ngModel)]="senha"
+          placeholder="Mínimo 6 caracteres"
+          required />
+        <span class="material-icons">lock</span>
+      </div>
+
+      <label for="confirmarSenha">Confirmação da senha</label>
+      <div class="input-icon">
+        <input
+          id="confirmarSenha"
+          type="password"
+          name="confirmarSenha"
+          [(ngModel)]="confirmarSenha"
+          placeholder="Confirme sua senha"
+          required />
+        <span class="material-icons">lock</span>
+      </div>
+
+      <button type="submit" class="btn-primary">Cadastrar</button>
+    </form>
+  </div>
+
+</div>

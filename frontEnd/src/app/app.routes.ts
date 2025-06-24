@@ -4,7 +4,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { PlacasComponent } from './components/placas/placas.component';
 
 export const routes: Routes = [
-    { path: '', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
+    { path: '', component: RegisterComponent },  
+    { path: 'login', component: LoginComponent },
     { path: 'placas', component: PlacasComponent }
 ];
