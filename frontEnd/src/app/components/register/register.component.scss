@@ -8,10 +8,13 @@ body, html {
   font-family: 'Poppins', sans-serif;
 }
 
-.container {
+.tela-container {
   display: flex;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 .left {
@@ -34,9 +37,10 @@ body, html {
 }
 
 .left h2 {
-  font-size: 24px;
+  font-size: 32px; /* Aumentado */
   font-weight: bold;
   margin-bottom: 15px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .left p {
@@ -83,11 +87,12 @@ form {
 }
 
 form h2 {
-  font-size: 24px;
+  font-size: 32px; /* Aumentado */
   margin-bottom: 20px;
   font-weight: 600;
   color: #2f2f8f;
   text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
 
 form label {
@@ -148,7 +153,7 @@ form label {
 }
 
 @media (max-width: 768px) {
-  .container {
+  .tela-container {
     flex-direction: column;
   }
 

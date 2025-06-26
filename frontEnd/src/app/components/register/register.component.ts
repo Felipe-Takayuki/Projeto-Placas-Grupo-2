@@ -29,7 +29,7 @@ export class RegisterComponent {
     this.limparFormulario();
   }
 
-  // 🔍 Valida todos os campos
+  
   validarCampos(): boolean {
     if (!this.nome.trim() || !this.email.trim() || !this.senha || !this.confirmarSenha) {
       alert('⚠️ Por favor, preencha todos os campos!');
@@ -54,7 +54,7 @@ export class RegisterComponent {
     return true;
   }
 
-  // 🔍 Verifica se o email é válido
+ 
   validarEmail(email: string): boolean {
     const regex = /^\S+@\S+\.\S+$/;
     return regex.test(email);
