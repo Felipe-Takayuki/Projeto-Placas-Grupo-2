@@ -18,6 +18,11 @@ export class EntradaRepository implements IGenericRepository{
         const [result] = await this.db.query(query,values) 
         return entrada
     }
+    async delete(placa_id:number): Promise<any> {
+      const query = "DELETE FROM entradas WHERE placa_id = ?"
+      const [result] = await this.db.query(query, placa_id) 
+      return result 
+    }
     async getAll(): Promise<any[]> {
       const query = "SELECT * FROM entradas"
       const [entrada] = await this.db.query(query)
