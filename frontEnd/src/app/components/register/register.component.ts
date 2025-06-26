@@ -25,29 +25,29 @@ export class RegisterComponent {
     };
 
     console.log('Dados enviados:', dados);
-    alert('✅ Cadastro realizado com sucesso!');
+    alert(' Cadastro realizado com sucesso!');
     this.limparFormulario();
   }
 
-  
+     
   validarCampos(): boolean {
     if (!this.nome.trim() || !this.email.trim() || !this.senha || !this.confirmarSenha) {
-      alert('⚠️ Por favor, preencha todos os campos!');
+      alert(' Por favor, preencha todos os campos!');
       return false;
     }
 
     if (!this.validarEmail(this.email)) {
-      alert('⚠️ Por favor, insira um email válido!');
+      alert(' Por favor, insira um email válido!');
       return false;
     }
 
     if (this.senha.length < 6) {
-      alert('⚠️ A senha deve ter pelo menos 6 caracteres!');
+      alert(' A senha deve ter pelo menos 6 caracteres!');
       return false;
     }
 
     if (this.senha !== this.confirmarSenha) {
-      alert('⚠️ As senhas não coincidem!');
+      alert(' As senhas não coincidem!');
       return false;
     }
 
