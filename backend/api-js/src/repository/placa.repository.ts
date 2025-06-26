@@ -1,6 +1,7 @@
 import { Connection } from "mysql2/promise"
 import { IGenericRepository } from "./generic.repository"
 import { IPlaca } from "../model/placa.model"
+import { IEntrada } from "../model/entrada.model"
 
 export class PlacaRepository implements IGenericRepository{
     constructor(public db:Connection){}
@@ -27,9 +28,6 @@ export class PlacaRepository implements IGenericRepository{
       }
 
       const keys = Object.keys(updateData).filter((key) => updateData[key] !== undefined && key !== "id");
-      if (keys.length === 0) {
-        throw new Error("Nenhum campo fornecido para atualizar.");
-      }
 
       const columns = keys.map((key) => `${key} = ?`).join(", ");
       const values = keys.map((key) => updateData[key]);
@@ -40,15 +38,42 @@ export class PlacaRepository implements IGenericRepository{
     }
 
 
-    async delete(id: number) {
+    async delete(id: number){
       const query = "DELETE FROM placas WHERE id = ?"
       const [result] = await this.db.query(query, id) 
       return result 
     } 
 
-    async getAll() {
-      const query = "SELECT * FROM placas"
-      const [placas] = await this.db.query(query)
-      return placas as IPlaca[]
+    async getAll(): Promise<any> {
+      const query = `  
+      SELECT p.id, p.placa, p.motorista, p.cargo, p.funcao_cargo, p.modelo_veiculo, p.cor_veiculo,
+      e.permitido, e.placa_id, e.data_entrada
+      FROM placas p
+      LEFT JOIN entradas e ON p.id = e.placa_id
+      `
+      
+      const [rows] = await this.db.query(query)
+      return (rows as any[]).map(row => {
+        const placa: IPlaca = {
+          id : row.id,
+          number: row.placa,
+          cargo: row.cargo,
+          funcao_cargo: row.funcao_cargo,
+          cor_veiculo: row.cor_veiculo,
+          modelo_veiculo: row.modelo_veiculo,
+          motorista: row.motorista
+
+        }
+      const entrada: IEntrada = {
+        permitido: row.permitido,
+        data_entrada: row.data_entrada,
+        placa_id: row.placa_id
+      }
+      
+      return { placa, entrada };
+
+      }
+      );
+
     }
 }
