@@ -1,4 +1,4 @@
-interface IPlaca{
+export interface IPlaca{
     id:number
     number:string
     motorista:string

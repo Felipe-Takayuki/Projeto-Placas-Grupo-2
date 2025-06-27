@@ -6,5 +6,6 @@ export function usuarioRouter(usuarioRepository: UserRepository) {
   const router = Router();
   router.post('/',(req, res) => userControler.create(req, res) );
   router.get('/',(req, res) => userControler.getAll(req, res));
+  router.post("/login", (req, res) => userControler.validacao(req, res))
   return router
 }

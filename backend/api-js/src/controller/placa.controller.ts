@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { PlacaRepository } from '../repository/placa.repository';
 import { IGenericControler } from './generic.controller';
+import { IPlaca } from "../model/placa.model"
 
 export class PlacaController implements IGenericControler{
 

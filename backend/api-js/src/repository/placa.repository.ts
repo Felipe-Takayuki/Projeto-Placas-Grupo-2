@@ -1,5 +1,7 @@
 import { Connection } from "mysql2/promise"
 import { IGenericRepository } from "./generic.repository"
+import { IPlaca } from "../model/placa.model"
+import { IUser } from "../model/usuario.model"
 
 export class PlacaRepository implements IGenericRepository{
     constructor(public db:Connection){}
