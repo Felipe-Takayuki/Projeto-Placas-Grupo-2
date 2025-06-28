@@ -1,19 +1,70 @@
-<div class="modal">
-    <h2>Editar Veículo</h2>
-  
-    <label>Placa:</label>
-    <input [(ngModel)]="veiculo!.placa" />
-  
-    <label>Motorista:</label>
-    <input [(ngModel)]="veiculo!.motorista" />
-  
-    <label>Entrada:</label>
-    <select [(ngModel)]="veiculo!.entrada">
-      <option>Aprovada</option>
-      <option>Reprovada</option>
-    </select>
-  
-    <button (click)="salvarEdicao()">Salvar</button>
-    <button (click)="cancelarEdicao()">Cancelar</button>
+<div class="modal-backdrop show"></div>
+<div class="modal show d-block" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <h5 class="modal-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 36 36" fill="none">
+            <path
+              d="M21 7.5C21.3883 7.49999 21.7614 7.65054 22.041 7.92L22.1715 8.0625L27.72 15H28.5C29.6478 14.9999 30.7523 15.4385 31.5874 16.2259C32.4225 17.0134 32.9252 18.0902 32.9925 19.236L33 19.5V25.5C33 25.8978 32.842 26.2794 32.5607 26.5607C32.2794 26.842 31.8978 27 31.5 27H29.7435C29.433 27.8773 28.8582 28.6367 28.0983 29.1739C27.3383 29.711 26.4306 29.9994 25.5 29.9994C24.5694 29.9994 23.6617 29.711 22.9017 29.1739C22.1418 28.6367 21.567 27.8773 21.2565 27H14.7435C14.433 27.8773 13.8582 28.6367 13.0983 29.1739C12.3383 29.711 11.4306 29.9994 10.5 29.9994C9.5694 29.9994 8.66167 29.711 7.90174 29.1739C7.1418 28.6367 6.56702 27.8773 6.2565 27H4.5C4.10218 27 3.72064 26.842 3.43934 26.5607C3.15804 26.2794 3 25.8978 3 25.5V16.5L3.0105 16.3245L3.0225 16.2405L3.048 16.1235L3.066 16.0695L3.087 15.9945L6.108 8.4435C6.2192 8.16516 6.41124 7.92651 6.65935 7.75834C6.90746 7.59017 7.20027 7.50019 7.5 7.5H21ZM10.5 24C10.1022 24 9.72064 24.158 9.43934 24.4393C9.15804 24.7206 9 25.1022 9 25.5C9 25.8978 9.15804 26.2794 9.43934 26.5607C9.72064 26.842 10.1022 27 10.5 27C10.8978 27 11.2794 26.842 11.5607 26.5607C11.842 26.2794 12 25.8978 12 25.5C12 25.1022 11.842 24.7206 11.5607 24.4393C11.2794 24.158 10.8978 24 10.5 24ZM25.5 24C25.1022 24 24.7206 24.158 24.4393 24.4393C24.158 24.7206 24 25.1022 24 25.5C24 25.8978 24.158 26.2794 24.4393 26.5607C24.7206 26.842 25.1022 27 25.5 27C25.8978 27 26.2794 26.842 26.5607 26.5607C26.842 26.2794 27 25.8978 27 25.5C27 25.1022 26.842 24.7206 26.5607 24.4393C26.2794 24.158 25.8978 24 25.5 24ZM16.5 10.5H8.514L6.714 15H16.5V10.5ZM20.28 10.5H19.5V15H23.88L20.28 10.5Z"
+              fill="#FFF8F8" />
+          </svg>
+          {{ placa?.id ? 'Editar Placa' : 'Adicionar Placa' }}
+        </h5>
+        <button type="button" class="btn-close " aria-label="Close" (click)="cancelar.emit()"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSalvar()">
+          <div class="row">
+
+            <div class="col-6 mb-3">
+              <label class="form-label">Placa:</label>
+              <input [(ngModel)]="dados.number" name="number" class="form-control" required />
+            </div>
+
+            <div class="col-6 mb-3">
+              <label class="form-label">Motorista:</label>
+              <input [(ngModel)]="dados.motorista" name="motorista" class="form-control" required />
+            </div>
+
+            <div class="col-6 mb-3">
+              <label class="form-label">Cargo:</label>
+              <select [(ngModel)]="dados.cargo" name="cargo" class="form-select" required>
+                <option *ngFor="let cargo of cargos" [value]="cargo">{{ cargo }}</option>
+              </select>
+            </div>
+
+            <div class="col-6 mb-3">
+              <label class="form-label">Função:</label>
+              <input [(ngModel)]="dados.funcao_cargo" name="funcao_cargo" class="form-control" required />
+            </div>
+
+            <div class="col-6 mb-3">
+              <label class="form-label">Modelo do Veículo:</label>
+              <input [(ngModel)]="dados.modelo_veiculo" name="modelo_veiculo" class="form-control" required />
+            </div>
+
+            <div class="col-6 mb-3">
+              <label class="form-label">Cor do Veículo:</label>
+              <input [(ngModel)]="dados.cor_veiculo" name="cor_veiculo" class="form-control" required />
+            </div>
+
+            <div class="col-6 mb-3">
+              <label>Entrada:</label>
+              <select [(ngModel)]="dados.permitido" name="entrada" class="form-select">
+                <option [ngValue]="true">Aprovada</option>
+                <option [ngValue]="false">Reprovada</option>
+              </select>
+            </div>
+            
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="onCancelar()">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="onSalvar()">Salvar</button>
+        </div>
+      </div>
+
+    </div>
   </div>
-  
+</div>
