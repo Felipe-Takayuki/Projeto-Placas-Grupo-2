@@ -1,4 +1,5 @@
 import { Connection } from "mysql2/promise"
+import { IUser } from "../model/usuario.model"
 
 export class UserRepository{
     constructor(public db:Connection){}
