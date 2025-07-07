@@ -1,0 +1,64 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.modal-body,
+.modal-header,
+.modal-footer{
+    background-color: #7886C7;
+    border-color:#2D336B ;
+}
+.modal-header{
+    color: #FFF8F8;
+}
+
+input, select, span{
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    background-color: #FFF8F8;
+    border-color: #2D336B;
+    font-size: 14px;
+}
+
+input:focus, section:focus {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    border-color: #66afe9;
+    outline: none;
+    background-color: #FFF8F8;
+}
+
+input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px #FFF8F8 inset !important;
+    -webkit-box-shadow: 0 0 0px 1000px #FFF8F8 inset !important;
+    -webkit-text-fill-color: #333 !important;
+  }
+  
+
+label{
+    color: #FFF8F8;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.btn-close{
+    color: red;
+}
+
+.modal-title{
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+}
+
+span{
+    border-right: none;
+}
+
+input[type="date"]{
+    cursor: pointer;
+    border-left: none;
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1); 
+}
+input[type="date"]:focus{
+   outline: none;
+   border-color: #2D336B;
+}

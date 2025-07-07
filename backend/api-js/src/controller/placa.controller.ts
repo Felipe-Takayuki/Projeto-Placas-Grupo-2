@@ -5,31 +5,40 @@ import { IPlaca } from '../model/placa.model';
 import { IEntrada } from '../model/entrada.model';
 import { EntradaRepository } from '../repository/entrada.repository';
 
-export class PlacaController implements IGenericControler{
+export class PlacaController implements IGenericControler {
 
-    constructor(public repository: PlacaRepository, public entrada_repository: EntradaRepository){}
+    constructor(public repository: PlacaRepository, public entrada_repository: EntradaRepository) { }
 
     async create(req: Request, res: Response): Promise<void> {
-        const {number, motorista,cargo,funcao_cargo,modelo_veiculo, cor_veiculo, permitido} = req.body;
+        console.log('this.repository:', this.repository);
+        console.log('this.entrada_repository:', this.entrada_repository);
+        const { number, motorista, cargo, funcao_cargo, modelo_veiculo, cor_veiculo, permitido } = req.body;
         const novoPlaca: IPlaca = {
             id: 0, number: number, motorista: motorista, cargo: cargo, funcao_cargo: funcao_cargo, modelo_veiculo: modelo_veiculo, cor_veiculo: cor_veiculo,
         };
 
         const PlacaCriado = await this.repository.create(novoPlaca);
-        const novaEntrada : IEntrada = {
+        const novaEntrada: IEntrada = {
             permitido: permitido,
             placa_id: PlacaCriado.id
         }
         const RegistroEntrada = await this.entrada_repository.create(novaEntrada)
-        res.json({placa: PlacaCriado, entrada: RegistroEntrada });
+
+        res.json({
+            ...PlacaCriado,
+            permitido: RegistroEntrada.permitido,
+            data_entrada: RegistroEntrada.data_entrada
+        });
+    
+
     }
-    async update(req: Request, res: Response):Promise<void> {
-        const { id, number, motorista,cargo,funcao_cargo,modelo_veiculo, cor_veiculo, permitido } = req.body;
-        
+    async update(req: Request, res: Response): Promise<void> {
+        const { id, number, motorista, cargo, funcao_cargo, modelo_veiculo, cor_veiculo, permitido } = req.body;
+
         const placaAtualizada: IPlaca = {
             id: id, number: number, motorista: motorista, cargo: cargo, funcao_cargo: funcao_cargo, modelo_veiculo: modelo_veiculo, cor_veiculo: cor_veiculo,
         };
-        
+
         const entradaAtualizada: IEntrada = {
             permitido: permitido,
             placa_id: id
@@ -38,7 +47,8 @@ export class PlacaController implements IGenericControler{
 
         const algumCampoPreenchido = campos.some(campo => typeof campo === 'string' && campo.trim() !== '');
 
-        let PlacaAtualizado = null
+
+        let PlacaAtualizado: unknown = null;
         if (algumCampoPreenchido) {
             PlacaAtualizado = await this.repository.update(placaAtualizada)
         }
@@ -52,7 +62,7 @@ export class PlacaController implements IGenericControler{
         })
 
     }
-    async delete(req:Request, res:Response):Promise<void> {
+    async delete(req:Request, res:Response): Promise<void> {
         const idStr = req.params.id;
 
         if (!idStr) {
@@ -67,8 +77,9 @@ export class PlacaController implements IGenericControler{
 
         const entradaRemovida = await this.entrada_repository.delete(id)
         const placaRemovida = await this.repository.delete(id)
-            res.json({placaRemovida, entradaRemovida})
+        res.json({placaRemovida, entradaRemovida})
     }
+    
     async getAll(req: Request, res: Response): Promise<void> {
         const Placas = await this.repository.getAll();
         res.json(Placas);

@@ -49,7 +49,7 @@ export class PlacaRepository implements IGenericRepository{
       SELECT p.id, p.placa, p.motorista, p.cargo, p.funcao_cargo, p.modelo_veiculo, p.cor_veiculo,
       e.permitido, e.placa_id, e.data_entrada
       FROM placas p
-      LEFT JOIN entradas e ON p.id = e.placa_id
+      LEFT JOIN entrada e ON p.id = e.placa_id
       `
       
       const [rows] = await this.db.query(query)

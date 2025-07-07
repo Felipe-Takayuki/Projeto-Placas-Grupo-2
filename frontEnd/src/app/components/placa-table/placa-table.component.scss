@@ -1,0 +1,119 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+.container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: calc(100vh - 60px);
+    background-color: rgba(223, 236, 230, 1);
+}
+
+.container {
+    background-color: rgba(169, 181, 223, 1);
+    height: 75%;
+    padding-right: 0;
+    padding-left: 0;
+    border-radius: 8px;
+}
+
+.container-header {
+    background-color: rgba(45, 51, 107, 1);
+    height: 60px;
+    width: 100%;
+}
+
+.navegacao {
+    background-color: rgba(45, 51, 107, 1);
+    height: 12%;
+    margin-bottom: 20px;
+    margin-top: -5px;
+}
+
+.th-color {
+    background-color: rgba(45, 51, 107, 1) !important;
+    color: #FFF8F8;
+    text-align: center;
+}
+
+.th-border-right {
+    border-radius: 8px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+
+}
+
+.th-border-left {
+    border-radius: 8px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    max-width: 100%;
+    padding: 10px;
+}
+
+.btn-primary {
+    background-color: #7886C7 !important;
+    border-color: #A9B5DF;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 5px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+td {
+    text-align: center;
+}
+
+.aprovada {
+    color: #2e7d32;
+    background-color: #c8e6c9;
+    font-weight: 500;
+
+}
+
+.reprovada {
+    color: #c62828;
+    background-color: #ffcdd2;
+    font-weight: 500;
+}
+
+
+input:focus {
+    outline: none;
+    border-color: #66afe9;
+    box-shadow: 0 0 4px rgba(102, 175, 233, 0.6);
+}
+
+::ng-deep .pagination .page-link {
+    background-color: rgba(45, 51, 107, 1);
+    color: #FFF8F8;
+    border: #7886C7;
+    margin: 0 2px;
+}
+
+::ng-deep .pagination .active .page-link {
+    background-color: #7886C7;
+    color: #FFF8F8;
+}
+
+.table tr td {
+    height: 48px;
+}
+
+.table tr th {
+    font-size: 14px;
+}
+
+.table tr td {
+    font-size: 14px;
+}
