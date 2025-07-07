@@ -1,8 +1,6 @@
 import { Connection } from "mysql2/promise"
 import { IGenericRepository } from "./generic.repository"
 import { IPlaca } from "../model/placa.model"
-import { IUser } from "../model/usuario.model"
-import { IPlaca } from "../model/placa.model"
 import { IEntrada } from "../model/entrada.model"
 
 export class PlacaRepository implements IGenericRepository{
