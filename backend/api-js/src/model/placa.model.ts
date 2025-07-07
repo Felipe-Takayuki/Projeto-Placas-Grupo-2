@@ -8,7 +8,7 @@ export interface IPlaca{
     cor_veiculo: string
 }
 
-enum ICargos{
+export enum ICargos{
    FUNCIONARIO_FATEC = 'FUNCIONARIO FATEC',
    FUNCIONARIO_SENAI = 'FUNCIONARIO SENAI',
    FUNCIONARIO_FUNDACAO = 'FUNCIONARIO FUNDACAO',

@@ -7,11 +7,22 @@ export async function connect(){
     const password = process.env.DB_PASSWORD
     const dbName = process.env.DB_NAME
 
-    console.log({host, user, password, dbName})
+    const connection = await mysql.createConnection({
+    host: host,
+    user: user,
+    password: password,
+    database: dbName,
+    port: 3306,
+    timezone: '-03:00' ,
+    typeCast: function (field, next) {
+        if (field.type === 'DATETIME' || field.type === 'TIMESTAMP') {
+        return new Date(field.string() + 'Z');
+        }
+        return next();
+    }
 
-    const connection = await mysql.createConnection(
-        `mysql://${user}:${password}@${host}:3306/${dbName}`
-    );
+    });
+
     console.log("Conectou no MySQL!");
 
     return connection;

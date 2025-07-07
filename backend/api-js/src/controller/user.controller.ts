@@ -8,6 +8,7 @@ import bcrypt, { hash, compare } from 'bcryptjs';
 const SECRET = process.env.SECRET
 
 
+
 export class UsuarioController implements IGenericControler{
 
     constructor(public repository: UserRepository){}

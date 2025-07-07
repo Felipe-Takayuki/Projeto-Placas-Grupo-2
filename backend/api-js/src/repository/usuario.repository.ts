@@ -2,7 +2,9 @@ import { Connection } from "mysql2/promise"
 import { IUser } from "../model/usuario.model"
 import { verify } from "jsonwebtoken"
 
+
 const SECRET = process.env.SECRET;
+
 
 export class UserRepository{
     constructor(public db:Connection){}
