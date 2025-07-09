@@ -2,22 +2,30 @@ import { Request, Response } from 'express';
 import { IGenericControler } from './generic.controller';
 import { UserRepository } from '../repository/usuario.repository';
 import { IUser } from '../model/usuario.model';
-import { sign, verify } from 'jsonwebtoken';
-import bcrypt, { hash, compare } from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
-const SECRET = process.env.SECRET
+const { sign } = jwt;
+const SECRET = process.env.SECRET!;
+if (!SECRET) throw new Error("SECRET não definido no .env");
 
-
-
-export class UsuarioController implements IGenericControler{
-
-    constructor(public repository: UserRepository){}
+export class UsuarioController implements IGenericControler {
+    constructor(public repository: UserRepository) {}
 
     async create(req: Request, res: Response): Promise<void> {
         const { nome, email, senha } = req.body;
-        const novoUsuario: IUser = { id: 0, name: nome, email, senha:  senha };
+
+        const senhaCriptografada = await bcrypt.hash(senha, 10);
+
+        const novoUsuario: IUser = {
+            id: 0,
+            name: nome,
+            email,
+            senha: senhaCriptografada
+        };
+
         const usuarioCriado = await this.repository.create(novoUsuario);
-        res.json(usuarioCriado);
+        res.status(201).json(usuarioCriado);
     }
 
     async getAll(req: Request, res: Response): Promise<void> {
@@ -26,25 +34,23 @@ export class UsuarioController implements IGenericControler{
     }
 
     async validacao(req: Request, res: Response): Promise<void> {
-        const { id ,email, senha } = req.body;
+        const { email, senha } = req.body;
+
         const usuario = await this.repository.validacao(email);
-        console.log(usuario)
 
         if (!usuario) {
-            return res.status(401).json({message: 'Email não encontrado'});
+            return res.status(401).json({ message: 'Email não encontrado' });
         }
 
-        // const senhaValida = await compare(senha, usuario.senha) DEPOIS TEM Q TENTAR FAZER UMA ENCRYPT
-
-        if (senha !== usuario.senha) {
-            return res.status(400).json({message: "Senha incorreta"})
+        const senhaValida = await bcrypt.compare(senha, usuario.senha);
+        if (!senhaValida) {
+            return res.status(401).json({ message: 'Senha incorreta' });
         }
-        
-        const token = sign({userId: usuario.id}, SECRET, {
-            expiresIn: 300
-        })
 
-        return res.json({auth: true, token})
-        
+        const token = sign({ userId: usuario.id }, SECRET, {
+            expiresIn: '5m' // ou 300 segundos
+        });
+
+        return res.json({ auth: true, token });
     }
 }
